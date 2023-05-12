@@ -1,26 +1,24 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.setTimeout(35e3);
 
-test('send message', async ({ browser, page }) => {
-  const viewer = await browser.newPage();
-  await viewer.goto('/');
-
-  await page.goto('/api/auth/signin');
-  await page.type('[name="name"]', 'test');
-  await page.click('[type="submit"]');
-
-  const nonce =
+test('send message', async ({ page }) => {
+  const randomText =
     Math.random()
       .toString(36)
       .replace(/[^a-z]+/g, '')
       .slice(0, 6) || 'nonce';
-  // await page.click('[type=submit]');
-  await page.type('[name=text]', nonce);
-  await page.click('[type=submit]');
 
-  await viewer.waitForSelector(`text=${nonce}`);
-  viewer.close();
+  await page.goto('/api/auth/signin');
+  await page.getByLabel('Name').click();
+  await page.getByLabel('Name').fill('Mati');
+  await page
+    .getByRole('button', { name: 'Sign in with Mocked GitHub' })
+    .click();
+  await page.getByPlaceholder('Write your message!').click();
+  await page.getByPlaceholder('Write your message!').fill(randomText);
+  await page.getByRole('button', { name: 'Send' }).click();
+  await expect(await page.getByText(randomText)).toBeVisible();
 });
 
 export {};
