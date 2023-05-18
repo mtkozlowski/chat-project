@@ -12,7 +12,7 @@ type MessageForm = z.infer<typeof MessageSchema>;
 
 export const SendMessageBox = () => {
   const [enterToPostMessage, setEnterToPostMessage] = useState(true);
-  const isTyping = trpc.post.isTyping.useMutation();
+  const isTyping = trpc.user.isTyping.useMutation();
   const addPost = trpc.post.add.useMutation();
 
   const { register, handleSubmit, watch, setValue } = useForm<MessageForm>({

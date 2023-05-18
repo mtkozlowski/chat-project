@@ -23,7 +23,7 @@ export function AddMessageForm({
     } catch {}
   }
 
-  const isTyping = trpc.post.isTyping.useMutation();
+  const isTyping = trpc.user.isTyping.useMutation();
 
   const userName = session?.user?.name;
   if (!userName) {
@@ -53,12 +53,6 @@ export function AddMessageForm({
     <>
       <form
         onSubmit={async (e) => {
-          e.preventDefault();
-          /**
-           * In a real app you probably don't want to use this manually
-           * Checkout React Hook Form - it works great with tRPC
-           * @link https://react-hook-form.com/
-           */
           await postMessage();
         }}
       >

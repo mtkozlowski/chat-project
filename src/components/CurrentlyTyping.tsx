@@ -3,7 +3,7 @@ import { trpc } from '../utils/trpc';
 
 export function CurrentlyTyping() {
   const [currentlyTyping, setCurrentlyTyping] = useState<string[]>([]);
-  trpc.post.whoIsTyping.useSubscription(undefined, {
+  trpc.user.whoIsTyping.useSubscription(undefined, {
     onData(data) {
       setCurrentlyTyping(data);
     }

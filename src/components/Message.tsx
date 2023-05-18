@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import userPic from '../../public/user-1-avatar.png';
-import convPic from '../../public/user-2-avatar.png';
 
 export interface MessageProps {
   message: string;
@@ -27,9 +25,11 @@ export function Message(props: MessageProps) {
           </div>
         </div>
         <Image
-          src={userIsAuthor ? userPic : convPic}
+          src={userIsAuthor ? '/user-1-avatar.png' : '/user-2-avatar.png'}
           alt="My profile"
           priority={true}
+          width={40}
+          height={40}
           className={`w-6 h-6 rounded-full order-${userIsAuthor ? 2 : 1}`}
         />
       </div>
