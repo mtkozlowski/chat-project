@@ -5,7 +5,7 @@ import { ee } from './eventEmitter';
 import { observable } from '@trpc/server/observable';
 import { prisma } from '../prisma';
 
-const RegisterUserSchema = z.object({
+export const RegisterUserSchema = z.object({
   name: z.string(),
   email: z.string().email()
 });
@@ -43,7 +43,7 @@ export const userRouter = router({
     });
   }),
 
-  register: authedProcedure
+  register: publicProcedure
     .input(RegisterUserSchema)
     .mutation(async ({ input }) => {
       return await prisma.user.create({

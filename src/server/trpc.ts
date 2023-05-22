@@ -11,6 +11,7 @@ const t = initTRPC.context<Context>().create({
 export const router = t.router;
 export const publicProcedure = t.procedure;
 export const middleware = t.middleware;
+
 const isAuthed = middleware(({ next, ctx }) => {
   const user = ctx.session?.user;
 

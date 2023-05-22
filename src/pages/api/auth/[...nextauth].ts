@@ -10,7 +10,7 @@ const providers: AppProviders = [
       if (credentials) {
         return await prisma.user.findUnique({
           where: {
-            id: credentials.email
+            email: credentials.email
           }
         });
       }
